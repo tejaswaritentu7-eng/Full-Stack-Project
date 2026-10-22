@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Authentication Section -->
+        <div id="auth-section" class="auth-container">
+            <div class="auth-box">
+                <h2 id="auth-title">Login</h2>
+                <form id="auth-form">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="email" id="email" placeholder="Email" style="display: none;">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit" id="auth-button">Login</button>
+                </form>
+                <p>
+                    <span id="auth-toggle-text">Don't have an account?</span>
+                    <button id="auth-toggle" class="toggle-btn">Register</button>
+                </p>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div id="chat-section" class="chat-container" style="display: none;">
+            <div class="sidebar">
+                <div class="user-info">
+                    <h3 id="welcome-text">Welcome!</h3>
+                    <button id="logout-btn" class="logout-btn">Logout</button>
+                </div>
+                <div class="users-list">
+                    <h4>Users</h4>
+                    <div id="users-container"></div>
+                </div>
+            </div>
+            
+            <div class="chat-main">
+                <div id="no-chat-selected" class="no-chat-selected">
+                    <h3>Select a user to start chatting</h3>
+                </div>
+                
+                <div id="chat-interface" class="chat-interface" style="display: none;">
+                    <div class="chat-header">
+                        <h3 id="chat-title">Chat with <span id="selected-user"></span></h3>
+                    </div>
+                    <div class="messages-container" id="messages-container"></div>
+                    <div class="message-input-container">
+                        <div class="message-input">
+                            <button id="emoji-btn" class="emoji-btn" title="Add emoji">😊</button>
+                            <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+                            <button id="send-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="emoji-picker" class="emoji-picker" style="display: none;">
+                            <div class="emoji-grid">
+                                <span class="emoji-item">😀</span><span class="emoji-item">😃</span><span class="emoji-item">😄</span><span class="emoji-item">😁</span>
+                                <span class="emoji-item">😆</span><span class="emoji-item">😅</span><span class="emoji-item">😂</span><span class="emoji-item">🤣</span>
+                                <span class="emoji-item">😊</span><span class="emoji-item">😇</span><span class="emoji-item">🙂</span><span class="emoji-item">🙃</span>
+                                <span class="emoji-item">😉</span><span class="emoji-item">😌</span><span class="emoji-item">😍</span><span class="emoji-item">🥰</span>
+                                <span class="emoji-item">😘</span><span class="emoji-item">😗</span><span class="emoji-item">😙</span><span class="emoji-item">😚</span>
+                                <span class="emoji-item">😋</span><span class="emoji-item">😛</span><span class="emoji-item">😝</span><span class="emoji-item">😜</span>
+                                <span class="emoji-item">🤪</span><span class="emoji-item">🤨</span><span class="emoji-item">🧐</span><span class="emoji-item">🤓</span>
+                                <span class="emoji-item">😎</span><span class="emoji-item">🤩</span><span class="emoji-item">🥳</span><span class="emoji-item">😏</span>
+                                <span class="emoji-item">😒</span><span class="emoji-item">😞</span><span class="emoji-item">😔</span><span class="emoji-item">😟</span>
+                                <span class="emoji-item">😕</span><span class="emoji-item">🙁</span><span class="emoji-item">☹️</span><span class="emoji-item">😣</span>
+                                <span class="emoji-item">😖</span><span class="emoji-item">😫</span><span class="emoji-item">😩</span><span class="emoji-item">🥺</span>
+                                <span class="emoji-item">😢</span><span class="emoji-item">😭</span><span class="emoji-item">😤</span><span class="emoji-item">😠</span>
+                                <span class="emoji-item">😡</span><span class="emoji-item">🤬</span><span class="emoji-item">🤯</span><span class="emoji-item">😳</span>
+                                <span class="emoji-item">🥵</span><span class="emoji-item">🥶</span><span class="emoji-item">😱</span><span class="emoji-item">😨</span>
+                                <span class="emoji-item">😰</span><span class="emoji-item">😥</span><span class="emoji-item">😓</span><span class="emoji-item">🤗</span>
+                                <span class="emoji-item">🤔</span><span class="emoji-item">🤭</span><span class="emoji-item">🤫</span><span class="emoji-item">🤥</span>
+                                <span class="emoji-item">😶</span><span class="emoji-item">😐</span><span class="emoji-item">😑</span><span class="emoji-item">😬</span>
+                                <span class="emoji-item">🙄</span><span class="emoji-item">😯</span><span class="emoji-item">😦</span><span class="emoji-item">😧</span>
+                                <span class="emoji-item">😮</span><span class="emoji-item">😲</span><span class="emoji-item">🥱</span><span class="emoji-item">😴</span>
+                                <span class="emoji-item">🤤</span><span class="emoji-item">😪</span><span class="emoji-item">😵</span><span class="emoji-item">🤐</span>
+                                <span class="emoji-item">🥴</span><span class="emoji-item">🤢</span><span class="emoji-item">🤮</span><span class="emoji-item">🤧</span>
+                                <span class="emoji-item">😷</span><span class="emoji-item">🤒</span><span class="emoji-item">🤕</span><span class="emoji-item">🤑</span>
+                                <span class="emoji-item">🤠</span><span class="emoji-item">😈</span><span class="emoji-item">👿</span><span class="emoji-item">👹</span>
+                                <span class="emoji-item">👺</span><span class="emoji-item">🤡</span><span class="emoji-item">💩</span><span class="emoji-item">👻</span>
+                                <span class="emoji-item">💀</span><span class="emoji-item">☠️</span><span class="emoji-item">👽</span><span class="emoji-item">👾</span>
+                                <span class="emoji-item">🤖</span><span class="emoji-item">🎃</span><span class="emoji-item">😺</span><span class="emoji-item">😸</span>
+                                <span class="emoji-item">😹</span><span class="emoji-item">😻</span><span class="emoji-item">😼</span><span class="emoji-item">😽</span>
+                                <span class="emoji-item">🙀</span><span class="emoji-item">😿</span><span class="emoji-item">😾</span><span class="emoji-item">❤️</span>
+                                <span class="emoji-item">🧡</span><span class="emoji-item">💛</span><span class="emoji-item">💚</span><span class="emoji-item">💙</span>
+                                <span class="emoji-item">💜</span><span class="emoji-item">🤎</span><span class="emoji-item">🖤</span><span class="emoji-item">🤍</span>
+                                <span class="emoji-item">💯</span><span class="emoji-item">💢</span><span class="emoji-item">💥</span><span class="emoji-item">💫</span>
+                                <span class="emoji-item">💦</span><span class="emoji-item">💨</span><span class="emoji-item">🕳️</span><span class="emoji-item">💣</span>
+                                <span class="emoji-item">💬</span><span class="emoji-item">👁️‍🗨️</span><span class="emoji-item">🗨️</span><span class="emoji-item">🗯️</span>
+                                <span class="emoji-item">💭</span><span class="emoji-item">💤</span><span class="emoji-item">👋</span><span class="emoji-item">🤚</span>
+                                <span class="emoji-item">🖐️</span><span class="emoji-item">✋</span><span class="emoji-item">🖖</span><span class="emoji-item">👌</span>
+                                <span class="emoji-item">🤌</span><span class="emoji-item">🤏</span><span class="emoji-item">✌️</span><span class="emoji-item">🤞</span>
+                                <span class="emoji-item">🤟</span><span class="emoji-item">🤘</span><span class="emoji-item">🤙</span><span class="emoji-item">👈</span>
+                                <span class="emoji-item">👉</span><span class="emoji-item">👆</span><span class="emoji-item">🖕</span><span class="emoji-item">👇</span>
+                                <span class="emoji-item">☝️</span><span class="emoji-item">👍</span><span class="emoji-item">👎</span><span class="emoji-item">👊</span>
+                                <span class="emoji-item">✊</span><span class="emoji-item">🤛</span><span class="emoji-item">🤜</span><span class="emoji-item">👏</span>
+                                <span class="emoji-item">🙌</span><span class="emoji-item">👐</span><span class="emoji-item">🤲</span><span class="emoji-item">🤝</span>
+                                <span class="emoji-item">🙏</span><span class="emoji-item">✍️</span><span class="emoji-item">💅</span><span class="emoji-item">🤳</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
